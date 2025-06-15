@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Спортивные клубы</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Спортивные клубы</h1>
+            <button class="toggle-theme-btn" onclick="toggleDarkMode()" title="Переключить тему">☾</button>
+        </header>
+        <div class="toolbar">
+            <!-- Поиск -->
+            <input type="text" id="searchQuery" placeholder="Поиск по названию или городу..." onkeydown="handleEnter(event)" />
+
+            <!-- Сортировка -->
+            <div style="display: flex; gap: 10px;">
+                <select id="sortField" onchange="searchClubs()">
+                    <option value="">Без сортировки</option>
+                    <option value="titles_count">Количество титулов</option>
+                    <option value="avg_age">Средний возраст</option>
+                </select>
+                <select id="sortOrder" onchange="searchClubs()">
+                    <option value="asc">По возрастанию</option>
+                    <option value="desc">По убыванию</option>
+                </select>
+            </div>
+
+            <!-- Кнопка фильтров -->
+            <button class="filter-toggle-btn" onclick="toggleFilters()">Фильтры ▼</button>
+
+            <!-- Фильтры -->
+            <div class="filters" id="filtersPanel">
+                <!-- Титулы -->
+                <div style="display: flex; gap: 20px; align-items: baseline;">
+                    <div style="display: flex; align-items: baseline; gap: 5px;">
+                        <label>Титулы от:&#160</label>
+                        <input type="number" id="titlesMin" min="0" placeholder="Мин." oninput="debounceSearch()" />
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 5px;">
+                        <label>до:</label>
+                        <input type="number" id="titlesMax" min="0" placeholder="Макс." oninput="debounceSearch()" />
+                    </div>
+                </div>
+
+                <!-- Возраст -->
+                <div style="display: flex; gap: 20px; align-items: baseline;">
+                    <div style="display: flex; align-items: baseline; gap: 5px;">
+                        <label>Возраст от:</label>
+                        <input type="number" id="ageMin" min="0" max="100" placeholder="Мин." oninput="debounceSearch()" />
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 5px;">
+                        <label>до:</label>
+                        <input type="number" id="ageMax" min="0" max="100" placeholder="Макс." oninput="debounceSearch()" />
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="reset-btn" onclick="resetFilters()">Сбросить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Таблица -->
+        <table id="clubsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Город</th>
+                    <th>Титулы</th>
+                    <th>Возраст</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
