@@ -15,6 +15,10 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(middleware.CORS())
 
+	e.POST("/clubs", handlers.CreateClub)
+	e.PUT("/clubs/:id", handlers.UpdateClub)
+	e.DELETE("/clubs/:id", handlers.DeleteClub)
+
 	// Роуты API
 	e.GET("/clubs", handlers.GetClubs)
 

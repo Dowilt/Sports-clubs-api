@@ -14,7 +14,6 @@
         <div class="toolbar">
             <!-- Поиск -->
             <input type="text" id="searchQuery" placeholder="Поиск по названию или городу..." onkeydown="handleEnter(event)" />
-
             <!-- Сортировка -->
             <div style="display: flex; gap: 10px;">
                 <select id="sortField" onchange="searchClubs()">
@@ -27,16 +26,28 @@
                     <option value="desc">По убыванию</option>
                 </select>
             </div>
-
+             <!-- Кнопка добавить -->
+            <button class="filter-toggle-btn" onclick="toggleAddPanel()" title="Добавить клуб">Добавить ▼</button>
+            <!-- Форма добавления клуба -->
+            <div class="add-panel" id="addPanel">
+                <div class="input-group">
+                    <input type="text" id="newClubName" placeholder="Название клуба" />
+                    <input type="text" id="newClubCity" placeholder="Город" />
+                    <input type="number" id="newClubTitles" min="0" placeholder="Количество титулов" />
+                    <input type="number" id="newClubAvgAge" min="0" max="100" placeholder="Средний возраст" />
+                </div>
+                <div class="controls">
+                    <button onclick="addNewClub()">Добавить клуб</button>
+                </div>
+            </div>
             <!-- Кнопка фильтров -->
             <button class="filter-toggle-btn" onclick="toggleFilters()">Фильтры ▼</button>
-
             <!-- Фильтры -->
             <div class="filters" id="filtersPanel">
                 <!-- Титулы -->
                 <div style="display: flex; gap: 20px; align-items: baseline;">
                     <div style="display: flex; align-items: baseline; gap: 5px;">
-                        <label>Титулы от:&#160</label>
+                        <label>Титулы от:&nbsp;</label>
                         <input type="number" id="titlesMin" min="0" placeholder="Мин." oninput="debounceSearch()" />
                     </div>
                     <div style="display: flex; align-items: baseline; gap: 5px;">
@@ -44,7 +55,6 @@
                         <input type="number" id="titlesMax" min="0" placeholder="Макс." oninput="debounceSearch()" />
                     </div>
                 </div>
-
                 <!-- Возраст -->
                 <div style="display: flex; gap: 20px; align-items: baseline;">
                     <div style="display: flex; align-items: baseline; gap: 5px;">
@@ -56,13 +66,11 @@
                         <input type="number" id="ageMax" min="0" max="100" placeholder="Макс." oninput="debounceSearch()" />
                     </div>
                 </div>
-
                 <div class="controls">
                     <button class="reset-btn" onclick="resetFilters()">Сбросить</button>
                 </div>
             </div>
         </div>
-
         <!-- Таблица -->
         <table id="clubsTable">
             <thead>
@@ -70,14 +78,14 @@
                     <th>ID</th>
                     <th>Название</th>
                     <th>Город</th>
-                    <th>Титулы</th>
-                    <th>Возраст</th>
+                    <th class="center-cell">Титулы</th>
+                    <th class="center-cell">Возраст</th>
+                    <th class="delete-cell">Удалить</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
